@@ -1,29 +1,51 @@
 {
   "name": "changelogsmith",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "private": true,
-  "description": "Automated changelogs for GitHub repositories.",
+  "description": "Automated changelogs and release drafts for GitHub repositories.",
   "author": "Nillan Sivarasa",
   "license": "ISC",
-  "homepage": "https://github.com//",
+  "homepage": "https://github.com/nlln19/changelogsmith#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nlln19/changelogsmith.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nlln19/changelogsmith/issues"
+  },
   "keywords": [
-    "probot",
     "github",
-    "probot-app"
+    "github-app",
+    "probot",
+    "changelog",
+    "release-notes",
+    "release-drafts",
+    "automation",
+    "pull-requests"
   ],
+  "type": "module",
+  "main": "index.js",
   "scripts": {
     "start": "probot run ./index.js",
-    "test": "node --test"
+    "dev": "probot run ./index.js",
+    "test": "node --test",
+    "check": "node --check index.js",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "probot": "^14.3.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0",
     "nock": "^14.0.12",
+    "prettier": "^3.0.0",
     "smee-client": "^5.0.0"
   },
   "engines": {
-    "node": "^20.18.1 || >= 22"
-  },
-  "type": "module"
+    "node": ">=20.18.1"
+  }
 }
