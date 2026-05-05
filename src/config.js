@@ -31,15 +31,28 @@ export const DEFAULT_CONFIG = {
 };
 
 export async function loadConfig(context) {
-  const repoConfig = await context.config("changelogsmith.yml", {});
+  try {
+    const repoConfig = await context.config("changelogsmith.yml", {});
 
-  return {
-    ...DEFAULT_CONFIG,
-    ...repoConfig,
-    sectionOrder: repoConfig.sectionOrder ?? DEFAULT_CONFIG.sectionOrder,
-    labelSections: {
-      ...DEFAULT_CONFIG.labelSections,
-      ...(repoConfig.labelSections ?? {})
-    }
-  };
+    return {
+      ...DEFAULT_CONFIG,
+      ...repoConfig,
+      sectionOrder: repoConfig.sectionOrder ?? DEFAULT_CONFIG.sectionOrder,
+      labelSections: {
+        ...DEFAULT_CONFIG.labelSections,
+        ...(repoConfig.labelSections ?? {})
+      }
+    };
+  } catch (error) {
+    context.log.warn(
+      {
+        status: error.status,
+        message: error.message,
+        requestUrl: error.request?.url
+      },
+      "Could not load ChangelogSmith config. Falling back to default config."
+    );
+
+    return DEFAULT_CONFIG;
+  }
 }
