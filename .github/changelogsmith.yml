@@ -1,0 +1,25 @@
+commentOnMergedPullRequest: false
+changelogTitle: Changelog Preview
+
+sectionOrder:
+  - Breaking Changes
+  - Features
+  - Fixes
+  - Documentation
+  - Maintenance
+  - Other
+
+labelSections:
+  breaking: Breaking Changes
+  breaking-change: Breaking Changes
+  feature: Features
+  enhancement: Features
+  bug: Fixes
+  fix: Fixes
+  docs: Documentation
+  documentation: Documentation
+  chore: Maintenance
+  maintenance: Maintenance
+  refactor: Maintenance
+  dependencies: Maintenance
+  deps: Maintenance
