@@ -1,20 +1,17 @@
 # ChangelogSmith
 
-> A GitHub App that generates clean changelog previews from merged pull requests.
-
-ChangelogSmith helps maintainers create release changelogs directly from GitHub pull requests. It detects merged pull requests, groups them by labels and generates a release changelog preview using a simple pull request comment command.
+A GitHub App that generates changelog previews from merged pull requests.
 
 ## Features
 
-- Detects merged pull requests via GitHub webhooks
+- Detects merged pull requests
 - Finds the latest GitHub release
-- Generates changelogs only from pull requests merged after the latest release
-- Groups pull requests by labels
-- Supports preview comments with `/changelogsmith preview`
-- Updates existing bot preview comments instead of creating duplicates
-- Supports repository-specific configuration through `.github/changelogsmith.yml`
+- Includes only PRs merged after the latest release
+- Groups PRs by labels such as `feature`, `bug`, and `docs`
+- Supports `/changelogsmith preview` in pull request comments
+- Works without AI or paid external APIs
 
-## Example
+## Usage
 
 Comment this on a pull request:
 
@@ -22,22 +19,93 @@ Comment this on a pull request:
 /changelogsmith preview
 ```
 
-ChangelogSmith will respond with a preview like:
+ChangelogSmith replies with a release changelog preview.
 
-## ChangelogSmith Preview
+Example:
 
-Latest release: `v0.1.0`
-Changes since: `2026-05-06T08:15:50.000Z`
-Merged pull requests: `2`
-
----
-
+```md
 ## Release Changelog since v0.1.0
 
 ### Features
 
-- Add changelog preview command (#17) by @nlln19
+- Add preview command (#17) by @nlln19
 
 ### Fixes
 
-- Fix pull request grouping (#18) by @nlln19
+- Fix label grouping (#18) by @nlln19
+```
+
+## Default Label Mapping
+
+| Labels | Section |
+|---|---|
+| `breaking`, `breaking-change` | Breaking Changes |
+| `feature`, `enhancement` | Features |
+| `bug`, `fix` | Fixes |
+| `docs`, `documentation` | Documentation |
+| `chore`, `refactor`, `dependencies`, `deps` | Maintenance |
+| everything else | Other |
+
+## Configuration
+
+Optional repository config:
+
+```txt
+.github/changelogsmith.yml
+```
+
+Example:
+
+```yml
+commentOnMergedPullRequest: false
+changelogTitle: Pull Request Changelog Preview
+
+sectionOrder:
+  - Breaking Changes
+  - Features
+  - Fixes
+  - Documentation
+  - Maintenance
+  - Other
+```
+
+## Local Development
+
+```sh
+npm install
+npm start
+```
+
+Create a local `.env` file:
+
+```env
+WEBHOOK_PROXY_URL=https://smee.io/your-smee-url
+APP_ID=your-github-app-id
+PRIVATE_KEY_PATH=your-private-key.pem
+WEBHOOK_SECRET=development
+LOG_LEVEL=info
+```
+
+Do not commit `.env` or private key files.
+
+## GitHub App Permissions
+
+Required repository permissions:
+
+| Permission | Access |
+|---|---|
+| Metadata | Read-only |
+| Contents | Read-only |
+| Pull requests | Read-only |
+| Issues | Read and write |
+
+Subscribed events:
+
+```txt
+pull_request
+issue_comment
+```
+
+## License
+
+[ISC](LICENSE) © 2026 Nillan Sivarasa
