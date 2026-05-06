@@ -1,39 +1,98 @@
-## Contributing
+# Contributing
 
-[fork]: /fork
-[pr]: /compare
-[code-of-conduct]: CODE_OF_CONDUCT.md
+Thanks for your interest in contributing to ChangelogSmith.
 
-Hi there! We're thrilled that you'd like to contribute to this project. Your help is essential for keeping it great.
+ChangelogSmith is a GitHub App that generates changelog previews from merged pull requests.
 
-Please note that this project is released with a [Contributor Code of Conduct][code-of-conduct]. By participating in this project you agree to abide by its terms.
+## Reporting Issues
 
-## Issues and PRs
+Open an issue if you find a bug or have an idea for an improvement.
 
-If you have suggestions for how this project could be improved, or want to report a bug, open an issue! We'd love all and any contributions. If you have questions, too, we'd love to hear them.
+Please include:
 
-We'd also love PRs. If you're thinking of a large PR, we advise opening up an issue first to talk about it, though! Look at the links below if you're not sure how to open a PR.
+- what you expected to happen
+- what actually happened
+- steps to reproduce the issue
+- relevant logs or screenshots, if available
 
-## Submitting a pull request
+## Development Setup
 
-1. [Fork][fork] and clone the repository.
-1. Configure and install the dependencies: `npm install`.
-1. Make sure the tests pass on your machine: `npm test`, note: these tests also apply the linter, so there's no need to lint separately.
-1. Create a new branch: `git checkout -b my-branch-name`.
-1. Make your change, add tests, and make sure the tests still pass.
-1. Push to your fork and [submit a pull request][pr].
-1. Pat your self on the back and wait for your pull request to be reviewed and merged.
+Install dependencies:
 
-Here are a few things you can do that will increase the likelihood of your pull request being accepted:
+```sh
+npm install
+```
 
-- Write and update tests.
-- Keep your changes as focused as possible. If there are multiple changes you would like to make that are not dependent upon each other, consider submitting them as separate pull requests.
-- Write a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html).
+Create a local `.env` file:
 
-Work in Progress pull requests are also welcome to get feedback early on, or if there is something blocked you.
+```env
+WEBHOOK_PROXY_URL=https://smee.io/your-smee-url
+APP_ID=your-github-app-id
+PRIVATE_KEY_PATH=your-private-key.pem
+WEBHOOK_SECRET=development
+LOG_LEVEL=info
+```
 
-## Resources
+Do not commit `.env` or private key files.
 
-- [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
-- [Using Pull Requests](https://help.github.com/articles/about-pull-requests/)
-- [GitHub Help](https://help.github.com)
+Start the app:
+
+```sh
+npm start
+```
+
+## Running Checks
+
+Before opening a pull request, run:
+
+```sh
+npm run check
+npm test
+npm run lint
+```
+
+Format code with:
+
+```sh
+npm run format
+```
+
+## Pull Requests
+
+1. Fork and clone the repository.
+2. Create a new branch:
+
+```sh
+git checkout -b my-change
+```
+
+3. Make your changes.
+4. Add or update tests when needed.
+5. Run the checks.
+6. Open a pull request.
+
+Keep pull requests focused and small when possible.
+
+## Commit Messages
+
+Use clear commit messages, for example:
+
+```txt
+fix: handle missing release config
+feat: add release preview command
+docs: update setup instructions
+```
+
+## Security
+
+Do not commit:
+
+- `.env`
+- GitHub App private keys
+- API keys
+- tokens
+- generated secret files
+
+## Code of Conduct
+
+By participating in this project, you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
