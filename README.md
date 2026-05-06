@@ -9,7 +9,6 @@ A GitHub App that generates changelog previews from merged pull requests.
 - Includes only PRs merged after the latest release
 - Groups PRs by labels such as `feature`, `bug`, and `docs`
 - Supports `/changelogsmith preview` in pull request comments
-- Works without AI or paid external APIs
 
 ## Usage
 
