@@ -1,33 +1,43 @@
-# changelogsmith
+# ChangelogSmith
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that Automated changelogs for GitHub repositories.
+> A GitHub App that generates clean changelog previews from merged pull requests.
 
-## Setup
+ChangelogSmith helps maintainers create release changelogs directly from GitHub pull requests. It detects merged pull requests, groups them by labels and generates a release changelog preview using a simple pull request comment command.
 
-```sh
-# Install dependencies
-npm install
+## Features
 
-# Run the bot
-npm start
+- Detects merged pull requests via GitHub webhooks
+- Finds the latest GitHub release
+- Generates changelogs only from pull requests merged after the latest release
+- Groups pull requests by labels
+- Supports preview comments with `/changelogsmith preview`
+- Updates existing bot preview comments instead of creating duplicates
+- Supports repository-specific configuration through `.github/changelogsmith.yml`
+
+## Example
+
+Comment this on a pull request:
+
+```txt
+/changelogsmith preview
 ```
 
-## Docker
+ChangelogSmith will respond with a preview like:
 
-```sh
-# 1. Build container
-docker build -t changelogsmith .
+## ChangelogSmith Preview
 
-# 2. Start container
-docker run -e APP_ID=<app-id> -e PRIVATE_KEY=<pem-value> changelogsmith
-```
+Latest release: `v0.1.0`
+Changes since: `2026-05-06T08:15:50.000Z`
+Merged pull requests: `2`
 
-## Contributing
+---
 
-If you have suggestions for how changelogsmith could be improved, or want to report a bug, open an issue! We'd love all and any contributions.
+## Release Changelog since v0.1.0
 
-For more, check out the [Contributing Guide](CONTRIBUTING.md).
+### Features
 
-## License
+- Add changelog preview command (#17) by @nlln19
 
-[ISC](LICENSE) © 2026 Nillan Sivarasa
+### Fixes
+
+- Fix pull request grouping (#18) by @nlln19
